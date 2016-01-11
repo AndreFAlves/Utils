@@ -15,7 +15,7 @@ function Check-Signatures {
     
         foreach($e in $disk)
         {
-            $file = gci $drive -Recurse -Include "*.exe"
+            $file = gci $drive -Recurse -Include "*.exe","*.dll","*.sys"
             Get-AuthenticodeSignature $file | where {$_.Status -eq "NotSigned"}
         }
     }
