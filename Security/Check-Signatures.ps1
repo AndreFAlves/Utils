@@ -7,15 +7,17 @@ function Check-Signatures {
             Break
         }
     }
+
     function Verify {
-    
         $ErrorActionPreference = "SilentlyContinue"
+        #Type of file to be checked. Examples: *.sys and *.dll
+        $type = "*.exe"
         $disk = gwmi win32_logicaldisk -Filter "DriveType='3'"
         $drive = $disks.DeviceID +"\"
     
         foreach($e in $disk)
         {
-            $file = gci $drive -Recurse -Include "*.exe"
+            $file = gci $drive -Recurse -Include $type
             Get-AuthenticodeSignature $file | where {$_.Status -eq "NotSigned"}
         }
     }
