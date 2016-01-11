@@ -15,3 +15,4 @@ function Get-Signatures {
         Get-AuthenticodeSignature $file | where {$_.Status -eq "NotSigned"}
     }
 }
+}
