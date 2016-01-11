@@ -17,4 +17,6 @@ function Verity {
         $file = gci $drive -Recurse -Include "*.exe"
         Get-AuthenticodeSignature $file | where {$_.Status -eq "NotSigned"}
     }
+    Check-Admin
+    Verity
 }
